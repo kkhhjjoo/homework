@@ -1,1 +1,41 @@
-/* 여기에 스타일을 구현해 주세요 */
+.wrapper1,
+.wrapper2 {
+  display: flow-root;
+  width: 600px;
+}
+.profile-item {
+  float: left;
+  position: relative;
+  width: 64px;
+  height: 64px;
+  margin: 20px;
+}
+.wrapper1 img,
+.wrapper2 img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: block;
+}
+
+.status-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 10;
+  bottom: 2px;
+  right: 2px;
+  box-sizing: border-box;
+}
+/* 온라인 상태 (녹색) */
+.status-dot.online {
+  background-color: #4caf50;
+  border: 1px solid white;
+}
+
+/* 자리비움 상태 (주황색) */
+.status-dot.offline {
+  background-color: rgb(243, 239, 239);
+  border: 1px solid white;
+}
