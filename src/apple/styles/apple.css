@@ -1,3 +1,322 @@
-@import "./card-component.css";
+@import './card-component.css';
 
-/* 카드 레이아웃 */
+:root {
+  --gap: 20px;
+  --maxw: 1400px;
+  --large-text: clamp(28px, 4vw, 48px);
+  --medium-text: clamp(16px, 2.5vw, 24px);
+  --small-text: 14px;
+  --line-normal: 1.5;
+}
+
+body {
+  font-family: 'SF Pro Display', 'Apple SD Gothic Neo', Arial, sans-serif;
+  min-height: 100vh;
+  color: #fff;
+  background: #000;
+  margin: 0;
+  padding: 0;
+}
+
+/* ========== Main Grid Container ========== */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-auto-rows: minmax(500px, auto);
+  gap: var(--gap);
+  padding: 40px 20px;
+  margin: 0 auto;
+  max-width: var(--maxw);
+}
+
+/* ========== Grid Areas (순서 고정) ========== */
+.ipad-pro {
+  grid-area: ipad-pro;
+  background:
+    linear-gradient(black, black),
+    url('../products/ipad_pro.jpeg') no-repeat center/contain;
+  background-blend-mode: overlay;
+}
+
+.ipad-air {
+  grid-area: ipad-air;
+  background:
+    linear-gradient(#bcdded, #bcdded),
+    url('../products/ipad_air.jpeg') no-repeat center/contain;
+  background-blend-mode: multiply;
+}
+
+.iphone-15-pro {
+  grid-area: iphone-15-pro;
+  background:
+    linear-gradient(black, black),
+    url('../products/iphone15_pro.jpeg') no-repeat center/contain;
+  background-blend-mode: overlay;
+}
+
+.iphone-15 {
+  grid-area: iphone-15;
+  background:
+    linear-gradient(#f5f5f7, #f5f5f7),
+    url('../products/iphone15.jpeg') no-repeat center/contain;
+  background-blend-mode: multiply;
+}
+
+.watch {
+  grid-area: watch;
+  background:
+    linear-gradient(black, black),
+    url('../products/apple_watch.jpeg') no-repeat center/contain;
+  background-blend-mode: overlay;
+}
+
+.macbook-air {
+  grid-area: macbook-air;
+  background:
+    linear-gradient(#f5f5f7, #f5f5f7),
+    url('../products/macbook_air.jpeg') no-repeat center/contain;
+  background-blend-mode: multiply;
+}
+
+.airpods-pro {
+  grid-area: airpods-pro;
+  background:
+    linear-gradient(black, black),
+    url('../products/airpods_pro.jpeg') no-repeat center/contain;
+  background-blend-mode: overlay;
+}
+
+/* ========== Card Container ========== */
+.container {
+  display: grid;
+  grid-template-rows: auto auto auto 1fr;
+  grid-template-areas:
+    'title'
+    'desc'
+    'links'
+    'img';
+  justify-items: center;
+  align-content: start;
+  gap: 16px;
+  padding: 40px 24px;
+  border-radius: 20px;
+  background: #111;
+  position: relative;
+  overflow: hidden;
+  min-height: 500px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* ========== Text Styles ========== */
+.container h2 {
+  grid-area: title;
+  margin: 0;
+  font-size: var(--large-text);
+  font-weight: 700;
+  letter-spacing: -0.02rem;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.container p {
+  grid-area: desc;
+  margin: 0;
+  font-size: var(--medium-text);
+  font-weight: 400;
+  line-height: var(--line-normal);
+  text-align: center;
+  opacity: 0.9;
+  position: relative;
+  z-index: 2;
+}
+
+.container span {
+  grid-area: span;
+  font-size: var(--small-text);
+  color: #86868b;
+  opacity: 0.8;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* ========== Links Styles ========== */
+.links {
+  grid-area: links;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  justify-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.links a {
+  display: inline-block;
+  padding: 10px 16px;
+  border: 1px solid #2997ff;
+  border-radius: 999px;
+  color: #2997ff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-align: center;
+  min-width: 120px;
+}
+
+.links a:hover {
+  background: rgba(41, 151, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+/* ========== Button Color Variants ========== */
+.container.blue .links a:first-of-type {
+  background-color: #2997ff;
+  color: white;
+  border-color: #2997ff;
+}
+
+.container.black .links a:first-of-type {
+  background-color: black;
+  color: white;
+  border-color: black;
+}
+
+.container.black .links a:last-of-type {
+  border: 1px solid black;
+  color: black;
+}
+
+/* ========== Image Styles ========== */
+.container picture {
+  grid-area: img;
+  display: grid;
+  place-items: center;
+  width: min(520px, 92vw);
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.container picture img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* ========== Color Variants ========== */
+.container:nth-of-type(even) {
+  color: black;
+}
+
+/* ========== Desktop Layout ========== */
+@media (min-width: 1024px) {
+  .grid-container {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, minmax(400px, auto));
+    grid-template-areas:
+      'ipad-pro ipad-pro ipad-air ipad-air'
+      'iphone-15-pro iphone-15 watch watch'
+      'macbook-air macbook-air airpods-pro airpods-pro';
+  }
+
+  .ipad-pro {
+    background:
+      linear-gradient(black, black),
+      url('../products/ipad_pro_2x.jpeg') no-repeat center/contain;
+    background-blend-mode: overlay;
+  }
+
+  .ipad-air {
+    background:
+      linear-gradient(#bcdded, #bcdded),
+      url('../products/ipad_air_2x.jpeg') no-repeat center/contain;
+    background-blend-mode: multiply;
+  }
+
+  .iphone-15-pro {
+    background:
+      linear-gradient(black, black),
+      url('../products/iphone15_pro_wide_2x.jpeg') no-repeat center/contain;
+    background-blend-mode: overlay;
+  }
+
+  .iphone-15 {
+    background:
+      linear-gradient(#f5f5f7, #f5f5f7),
+      url('../products/iphone15_2x.jpeg') no-repeat center/contain;
+    background-blend-mode: multiply;
+  }
+
+  .watch {
+    background:
+      linear-gradient(black, black),
+      url('../products/apple_watch_2x.jpeg') no-repeat center/contain;
+    background-blend-mode: overlay;
+  }
+
+  .macbook-air {
+    background:
+      linear-gradient(#f5f5f7, #f5f5f7),
+      url('../products/macbook_air_2x.jpeg') no-repeat center/contain;
+    background-blend-mode: multiply;
+  }
+
+  .airpods-pro {
+    background:
+      linear-gradient(black, black),
+      url('../products/airpods_pro_2x.jpeg') no-repeat center/contain;
+    background-blend-mode: overlay;
+  }
+}
+
+/* ========== Tablet Layout ========== */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+      'ipad-pro ipad-pro'
+      'ipad-air ipad-air'
+      'iphone-15-pro watch'
+      'macbook-air airpods-pro';
+  }
+}
+
+/* ========== Mobile Layout ========== */
+@media (max-width: 767px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'ipad-pro'
+      'ipad-air'
+      'iphone-15-pro'
+      'iphone-15'
+      'watch'
+      'macbook-air'
+      'airpods-pro';
+    padding: 20px 12px;
+    gap: 16px;
+  }
+
+  .container {
+    padding: 28px 18px;
+    border-radius: 16px;
+    min-height: 400px;
+  }
+
+  .links {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .links a {
+    width: 100%;
+    max-width: 200px;
+  }
+}
