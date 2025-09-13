@@ -1,322 +1,445 @@
-@import './card-component.css';
-
+/* CSS 변수 정의 */
 :root {
+  /* Colors */
+  --white: #f5f5f7;
+  --black: #1d1d1f;
+  --gray: #86868b;
+  --blue-100: #2997ff;
+  --blue-200: #0077ed;
+  --blue-300: #0071e3;
+  --blue-400: #006edb;
+
+  /* Sizes */
+  --size: 31.25rem; /* 500px */
   --gap: 20px;
   --maxw: 1400px;
-  --large-text: clamp(28px, 4vw, 48px);
+
+  /* Text Sizes */
+  --xx-small-text: 0.75rem; /* 12px */
+  --x-small-text: 0.875rem; /* 14px */
+  --small-text: 1.0625rem; /* 17px */
+  --base-text: 1.1875rem; /* 19px */
   --medium-text: clamp(16px, 2.5vw, 24px);
-  --small-text: 14px;
+  --large-text: clamp(28px, 4vw, 48px);
+  --extra-large-text: 2.5rem; /* 40px */
+
+  /* Spacing */
+  --x-small-spacing: 0.5rem; /* 8px */
+  --small-spacing: 0.75rem; /* 12px */
+  --base-spacing: 1rem; /* 16px */
+  --large-spacing: 2.5rem; /* 40px */
+  --extra-large-spacing: 3.75rem; /* 60px */
   --line-normal: 1.5;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-  font-family: 'SF Pro Display', 'Apple SD Gothic Neo', Arial, sans-serif;
+  font-family:
+    'SUIT Variable',
+    'SF Pro Display',
+    'Apple SD Gothic Neo',
+    -apple-system,
+    BlinkMacSystemFont,
+    Arial,
+    sans-serif;
+  background: var(--black);
   min-height: 100vh;
-  color: #fff;
-  background: #000;
+  color: var(--white);
   margin: 0;
   padding: 0;
 }
 
-/* ========== Main Grid Container ========== */
+/* 메인 그리드 컨테이너 */
 .grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  grid-auto-rows: minmax(500px, auto);
+  grid-auto-rows: minmax(var(--size), auto);
   gap: var(--gap);
   padding: 40px 20px;
   margin: 0 auto;
   max-width: var(--maxw);
 }
 
-/* ========== Grid Areas (순서 고정) ========== */
-.ipad-pro {
-  grid-area: ipad-pro;
-  background:
-    linear-gradient(black, black),
-    url('../products/ipad_pro.jpeg') no-repeat center/contain;
-  background-blend-mode: overlay;
-}
-
-.ipad-air {
-  grid-area: ipad-air;
-  background:
-    linear-gradient(#bcdded, #bcdded),
-    url('../products/ipad_air.jpeg') no-repeat center/contain;
-  background-blend-mode: multiply;
-}
-
-.iphone-15-pro {
-  grid-area: iphone-15-pro;
-  background:
-    linear-gradient(black, black),
-    url('../products/iphone15_pro.jpeg') no-repeat center/contain;
-  background-blend-mode: overlay;
-}
-
-.iphone-15 {
-  grid-area: iphone-15;
-  background:
-    linear-gradient(#f5f5f7, #f5f5f7),
-    url('../products/iphone15.jpeg') no-repeat center/contain;
-  background-blend-mode: multiply;
-}
-
-.watch {
-  grid-area: watch;
-  background:
-    linear-gradient(black, black),
-    url('../products/apple_watch.jpeg') no-repeat center/contain;
-  background-blend-mode: overlay;
-}
-
-.macbook-air {
-  grid-area: macbook-air;
-  background:
-    linear-gradient(#f5f5f7, #f5f5f7),
-    url('../products/macbook_air.jpeg') no-repeat center/contain;
-  background-blend-mode: multiply;
-}
-
-.airpods-pro {
-  grid-area: airpods-pro;
-  background:
-    linear-gradient(black, black),
-    url('../products/airpods_pro.jpeg') no-repeat center/contain;
-  background-blend-mode: overlay;
-}
-
-/* ========== Card Container ========== */
-.container {
+/* 카드 컨테이너 */
+.shell {
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  min-height: var(--size);
   display: grid;
+  justify-items: center;
+  align-content: start;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: var(--small-spacing) var(--small-spacing);
   grid-template-rows: auto auto auto 1fr;
   grid-template-areas:
     'title'
     'desc'
-    'links'
-    'img';
-  justify-items: center;
-  align-content: start;
-  gap: 16px;
-  padding: 40px 24px;
-  border-radius: 20px;
-  background: #111;
+    'space'
+    'links';
+
+  header {
+    grid-area: title;
+  }
+  strong {
+    grid-area: desc;
+  }
+
+  p {
+    grid-area: space;
+  }
+  .a-layout {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: start;
+    grid-area: links;
+  }
+  .shell-content {
+    display: contents;
+    gap: var(--small-spacing);
+  }
+}
+
+.shell-content {
+  text-align: center;
+  color: var(--white);
+  padding: 0;
+  z-index: 2;
   position: relative;
-  overflow: hidden;
-  min-height: 500px;
+  width: 100%;
+  display: grid;
+  align-content: start;
+  justify-items: center;
+}
+
+/* 각 제품별 배경 이미지와 스타일 */
+.shell-padpro {
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../products/ipad_pro.jpeg');
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
 }
 
-/* ========== Text Styles ========== */
-.container h2 {
-  grid-area: title;
-  margin: 0;
+.shell-padair {
+  background: linear-gradient(rgba(188, 221, 237, 0.8), rgba(188, 221, 237, 0.8)), url('../products/ipad_air.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: multiply;
+  color: var(--black);
+}
+
+.shell-15pro {
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../products/iphone15_pro.jpeg');
+  background-size: cover;
+  background-position: center;
+}
+
+.shell-15 {
+  background: linear-gradient(rgba(245, 245, 247, 0.9), rgba(245, 245, 247, 0.9)), url('../products/iphone15.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: multiply;
+  color: var(--black);
+}
+
+.shell-wch {
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../products/apple_watch.jpeg');
+  background-size: cover;
+  background-position: center;
+}
+
+.shell-mac {
+  background: linear-gradient(rgba(245, 245, 247, 0.9), rgba(245, 245, 247, 0.9)), url('../products/macbook_air.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: multiply;
+  color: var(--black);
+}
+
+.shell-pds {
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../products/airpods_pro.jpeg');
+  background-size: cover;
+  background-position: center;
+}
+
+@media (min-width: 768px) {
+  .shell-padpro {
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../products/ipad_pro_2x.jpeg');
+    background-size: cover;
+    background-position: center;
+  }
+
+  .shell-padair {
+    background: linear-gradient(rgba(188, 221, 237, 0.8), rgba(188, 221, 237, 0.8)), url('../products/ipad_air_2x.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+  }
+
+  .shell-15pro {
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../products/iphone15_pro_wide_2x.jpeg');
+    background-size: cover;
+    background-position: center;
+  }
+  .shell-15 {
+    background: linear-gradient(rgba(245, 245, 247, 0.9), rgba(245, 245, 247, 0.9)), url('../products/iphone15_2x.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+    color: var(--black);
+  }
+
+  .shell-wch {
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../products/apple_watch_2x.jpeg');
+    background-size: cover;
+    background-position: center;
+  }
+
+  .shell-mac {
+    background: linear-gradient(rgba(245, 245, 247, 0.9), rgba(245, 245, 247, 0.9)), url('../products/macbook_air_2x.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+    color: var(--black);
+  }
+
+  .shell-pds {
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../products/airpods_pro_2x.jpeg');
+    background-size: cover;
+    background-position: center;
+  }
+}
+/* 텍스트 스타일 */
+header {
   font-size: var(--large-text);
-  font-weight: 700;
-  letter-spacing: -0.02rem;
-  text-align: center;
-  position: relative;
-  z-index: 2;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--small-spacing);
 }
 
-.container p {
-  grid-area: desc;
-  margin: 0;
+strong {
   font-size: var(--medium-text);
   font-weight: 400;
   line-height: var(--line-normal);
-  text-align: center;
-  opacity: 0.9;
-  position: relative;
-  z-index: 2;
-}
-
-.container span {
-  grid-area: span;
-  font-size: var(--small-text);
-  color: #86868b;
-  opacity: 0.8;
-  text-align: center;
-  position: relative;
-  z-index: 2;
-}
-
-/* ========== Links Styles ========== */
-.links {
-  grid-area: links;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  justify-items: center;
-  position: relative;
-  z-index: 2;
-}
-
-.links a {
-  display: inline-block;
-  padding: 10px 16px;
-  border: 1px solid #2997ff;
-  border-radius: 999px;
-  color: #2997ff;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  text-align: center;
-  min-width: 120px;
-}
-
-.links a:hover {
-  background: rgba(41, 151, 255, 0.1);
-  transform: translateY(-2px);
-}
-
-/* ========== Button Color Variants ========== */
-.container.blue .links a:first-of-type {
-  background-color: #2997ff;
-  color: white;
-  border-color: #2997ff;
-}
-
-.container.black .links a:first-of-type {
-  background-color: black;
-  color: white;
-  border-color: black;
-}
-
-.container.black .links a:last-of-type {
-  border: 1px solid black;
-  color: black;
-}
-
-/* ========== Image Styles ========== */
-.container picture {
-  grid-area: img;
-  display: grid;
-  place-items: center;
-  width: min(520px, 92vw);
-  max-width: 100%;
-  height: auto;
-  margin: 0 auto;
-  position: relative;
-  z-index: 1;
-}
-
-.container picture img {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
+  margin-bottom: var(--x-small-spacing);
   display: block;
 }
 
-/* ========== Color Variants ========== */
-.container:nth-of-type(even) {
-  color: black;
+p {
+  font-size: var(--small-text);
+  color: var(--gray);
+  opacity: 0.8;
+  margin-bottom: var(--base-spacing);
 }
 
-/* ========== Desktop Layout ========== */
+/* 밝은 배경에서의 텍스트 색상 변경 */
+.shell-15 .shell-content header,
+.shell-15 .shell-content strong {
+  color: var(--black);
+}
+
+.shell-mac .shell-content header,
+.shell-mac .shell-content strong {
+  color: var(--black);
+}
+
+/* 링크 레이아웃 */
+.a-layout {
+  display: flex;
+  gap: var(--base-spacing);
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: var(--small-spacing);
+}
+
+/* 버튼 스타일 */
+.more-btn,
+.prc-btn {
+  font-size: var(--xx-small-text);
+  text-decoration: none;
+  padding: var(--x-small-spacing) var(--small-spacing);
+  border-radius: 20px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  min-width: 100px;
+  text-align: center;
+}
+
+/* 기본 파란색 테마 버튼 */
+.shell-padpro .more-btn,
+.shell-wch .more-btn,
+.shell-pds .more-btn {
+  color: var(--white);
+  background-color: var(--blue-300);
+  border: 1px solid var(--blue-300);
+}
+
+.shell-padpro .prc-btn,
+.shell-wch .prc-btn,
+.shell-pds .prc-btn {
+  color: var(--blue-300);
+  background-color: transparent;
+  border: 1px solid var(--blue-300);
+}
+
+/* 검은색 테마 버튼 (밝은 배경용) */
+.shell-15 .more-btn,
+.shell-padair .more-btn,
+.shell-mac .more-btn {
+  color: var(--white);
+  background-color: var(--black);
+  border: 1px solid var(--black);
+}
+
+.shell-15 .prc-btn,
+.shell-padair .prc-btn,
+.shell-mac .prc-btn {
+  color: var(--black);
+  background-color: transparent;
+  border: 1px solid var(--black);
+}
+
+/* iPhone 15 Pro 특별 스타일 */
+.shell-15pro .more-btn {
+  color: var(--white);
+  background-color: var(--blue-300);
+  border: 1px solid var(--blue-300);
+}
+
+.shell-15pro .prc-btn {
+  color: var(--blue-300);
+  background-color: transparent;
+  border: 1px solid var(--blue-300);
+}
+
+/* 호버 효과 */
+.more-btn:hover,
+.prc-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.shell-padpro .more-btn:hover,
+.shell-padair .more-btn:hover,
+.shell-wch .more-btn:hover,
+.shell-pds .more-btn:hover,
+.shell-15pro .more-btn:hover {
+  background-color: var(--blue-200);
+}
+
+.shell-padpro .prc-btn:hover,
+.shell-padair .prc-btn:hover,
+.shell-wch .prc-btn:hover,
+.shell-pds .prc-btn:hover,
+.shell-15pro .prc-btn:hover {
+  background-color: rgba(41, 151, 255, 0.1);
+}
+
+.shell-15 .more-btn:hover,
+.shell-mac .more-btn:hover {
+  background-color: #333;
+}
+
+.shell-15 .prc-btn:hover,
+.shell-mac .prc-btn:hover {
+  background-color: rgba(29, 29, 31, 0.1);
+}
+
+/* 데스크톱 레이아웃 */
 @media (min-width: 1024px) {
   .grid-container {
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(3, minmax(400px, auto));
-    grid-template-areas:
-      'ipad-pro ipad-pro ipad-air ipad-air'
-      'iphone-15-pro iphone-15 watch watch'
-      'macbook-air macbook-air airpods-pro airpods-pro';
-  }
-
-  .ipad-pro {
-    background:
-      linear-gradient(black, black),
-      url('../products/ipad_pro_2x.jpeg') no-repeat center/contain;
-    background-blend-mode: overlay;
-  }
-
-  .ipad-air {
-    background:
-      linear-gradient(#bcdded, #bcdded),
-      url('../products/ipad_air_2x.jpeg') no-repeat center/contain;
-    background-blend-mode: multiply;
-  }
-
-  .iphone-15-pro {
-    background:
-      linear-gradient(black, black),
-      url('../products/iphone15_pro_wide_2x.jpeg') no-repeat center/contain;
-    background-blend-mode: overlay;
-  }
-
-  .iphone-15 {
-    background:
-      linear-gradient(#f5f5f7, #f5f5f7),
-      url('../products/iphone15_2x.jpeg') no-repeat center/contain;
-    background-blend-mode: multiply;
-  }
-
-  .watch {
-    background:
-      linear-gradient(black, black),
-      url('../products/apple_watch_2x.jpeg') no-repeat center/contain;
-    background-blend-mode: overlay;
-  }
-
-  .macbook-air {
-    background:
-      linear-gradient(#f5f5f7, #f5f5f7),
-      url('../products/macbook_air_2x.jpeg') no-repeat center/contain;
-    background-blend-mode: multiply;
-  }
-
-  .airpods-pro {
-    background:
-      linear-gradient(black, black),
-      url('../products/airpods_pro_2x.jpeg') no-repeat center/contain;
-    background-blend-mode: overlay;
-  }
-}
-
-/* ========== Tablet Layout ========== */
-@media (min-width: 768px) and (max-width: 1023px) {
-  .grid-container {
     grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, minmax(400px, auto));
     grid-template-areas:
       'ipad-pro ipad-pro'
       'ipad-air ipad-air'
-      'iphone-15-pro watch'
+      'iphone-15-pro iphone-15-pro'
+      'iphone-15 watch'
       'macbook-air airpods-pro';
+  }
+
+  .shell-padpro {
+    grid-area: ipad-pro;
+  }
+  .shell-padair {
+    grid-area: ipad-air;
+  }
+  .shell-15pro {
+    grid-area: iphone-15-pro;
+  }
+  .shell-15 {
+    grid-area: iphone-15;
+  }
+  .shell-wch {
+    grid-area: watch;
+  }
+  .shell-mac {
+    grid-area: macbook-air;
+  }
+  .shell-pds {
+    grid-area: airpods-pro;
   }
 }
 
-/* ========== Mobile Layout ========== */
+/* 태블릿 레이아웃 */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--base-spacing);
+  }
+
+  .shell {
+    min-height: 400px;
+  }
+}
+
+/* 모바일 레이아웃 */
 @media (max-width: 767px) {
   .grid-container {
     grid-template-columns: 1fr;
-    grid-template-areas:
-      'ipad-pro'
-      'ipad-air'
-      'iphone-15-pro'
-      'iphone-15'
-      'watch'
-      'macbook-air'
-      'airpods-pro';
     padding: 20px 12px;
     gap: 16px;
   }
 
-  .container {
-    padding: 28px 18px;
-    border-radius: 16px;
+  .shell {
     min-height: 400px;
+    padding: var(--large-spacing) 18px;
+    border-radius: 16px;
   }
 
-  .links {
-    grid-template-columns: 1fr;
+  header {
+    font-size: var(--large-text);
+  }
+
+  strong {
+    font-size: var(--base-text);
+  }
+
+  .a-layout {
+    flex-direction: column;
+    align-items: center;
     gap: 8px;
   }
 
-  .links a {
+  .more-btn,
+  .prc-btn {
     width: 100%;
     max-width: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    font-size: 1.8rem;
+  }
+
+  strong {
+    font-size: 1rem;
   }
 }
